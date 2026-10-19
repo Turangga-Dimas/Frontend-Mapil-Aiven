@@ -1,0 +1,22 @@
+{
+  "name": "fullstack-mapil-aiven",
+  "version": "1.0.0",
+  "description": "Fullstack Fintech Pinjaman Online Desktop App with Next.js, Express.js & Aiven MySQL",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "start:backend": "npm --prefix backend start",
+    "start:frontend": "npm --prefix frontend start"
+  },
+  "keywords": [
+    "fintech",
+    "pinjaman-online",
+    "nextjs",
+    "express",
+    "aiven",
+    "mysql"
+  ],
+  "author": "Turangga Dimas",
+  "license": "MIT"
+}
