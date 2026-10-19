@@ -1,6 +1,16 @@
 import { HealthStatus, Loan, LoanStats, LoanStatus } from '../types/loan';
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
+const getApiBase = () => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  if (typeof window !== 'undefined') {
+    return '/api';
+  }
+  return 'http://localhost:5000/api';
+};
+
+const API_BASE = getApiBase();
 
 export async function fetchHealth(): Promise<HealthStatus> {
   try {
