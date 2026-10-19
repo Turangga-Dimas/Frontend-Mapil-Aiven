@@ -1,9 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-const dotenv = require('dotenv');
 const loanRoutes = require('./routes/loanRoutes');
-const { pool, initializeDatabase } = require('./config/db');
+const { pool, testConnection } = require('./config/db');
 
 dotenv.config();
 
@@ -76,5 +75,5 @@ app.listen(PORT, async () => {
   console.log(`🚀 Server Backend Express berjalan di http://localhost:${PORT}`);
   console.log(`📡 Menghubungkan ke MySQL Aiven...`);
   console.log(`====================================================`);
-  await initializeDatabase();
+  await testConnection();
 });

@@ -90,7 +90,34 @@ Fullstack-Mapil-Aiven/
    PORT=5000
    DATABASE_URL=mysql://avnadmin:PASSWORD_ANDA@mysql-xxxxx.aivencloud.com:PORT/defaultdb?ssl-mode=REQUIRED
    ```
-5. Saat backend dijalankan, tabel `loans` akan **otomatis dibuat** dan diisi data awal simulasi!
+5. Buka query editor MySQL Anda (misalnya melalui Aiven CLI, DBeaver, HeidiSQL, atau phpMyAdmin) dan jalankan script SQL berikut untuk membuat tabel:
+
+```sql
+CREATE TABLE IF NOT EXISTS loans (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  borrower_name VARCHAR(150) NOT NULL,
+  nik VARCHAR(20) NOT NULL,
+  phone VARCHAR(25) NOT NULL,
+  email VARCHAR(100) NOT NULL,
+  occupation VARCHAR(100) NOT NULL,
+  monthly_income DECIMAL(15,2) NOT NULL,
+  amount DECIMAL(15,2) NOT NULL,
+  tenor_months INT NOT NULL,
+  interest_rate DECIMAL(5,2) NOT NULL DEFAULT 1.50,
+  monthly_installment DECIMAL(15,2) NOT NULL,
+  total_payment DECIMAL(15,2) NOT NULL,
+  purpose TEXT,
+  status ENUM('PENDING', 'APPROVED', 'REJECTED', 'PAID') NOT NULL DEFAULT 'PENDING',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- (Opsional) Data Dummy Awal untuk Pengujian CRUD
+INSERT INTO loans (borrower_name, nik, phone, email, occupation, monthly_income, amount, tenor_months, interest_rate, monthly_installment, total_payment, purpose, status)
+VALUES
+('Budi Santoso', '3201123456780001', '081234567890', 'budi.santoso@gmail.com', 'Karyawan Swasta', 8000000.00, 10000000.00, 12, 1.50, 983333.33, 11800000.00, 'Renovasi rumah bagian dapur', 'APPROVED'),
+('Siti Rahmawati', '3201987654320002', '082198765432', 'siti.rahma@gmail.com', 'Wirausaha Kuliner', 12000000.00, 25000000.00, 24, 1.50, 1416666.67, 34000000.00, 'Ekspansi cabang outlet baru', 'PENDING');
+```
 
 ---
 
